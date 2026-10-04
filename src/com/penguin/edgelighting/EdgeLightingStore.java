@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package co.aospa.edgelighting;
+package com.penguin.edgelighting;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,8 +14,10 @@ import java.io.File;
 /** Where the toggle and the cutout live, shared by the settings screen and the provider. */
 final class EdgeLightingStore {
 
-    static final String AUTHORITY = "co.aospa.edgelighting.provider";
+    static final String AUTHORITY = "com.penguin.edgelighting.provider";
     static final Uri STATE_URI = Uri.parse("content://" + AUTHORITY + "/state");
+    /** Asks SystemUI to play the effect now, so it can be seen without waiting for a notification. */
+    static final String ACTION_PREVIEW = "com.penguin.edgelighting.action.PREVIEW";
 
     private static final String PREFS = "edge_lighting";
     private static final String KEY_ENABLED = "enabled";

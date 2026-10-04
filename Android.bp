@@ -143,8 +143,9 @@ android_app {
         "androidx.fragment_fragment",
     ],
 
-    platform_apis: true,
-    certificate: "platform",
+    // Not platform signed: platform_app may not map Play services' module code, which the
+    // segmentation runs from
+    sdk_version: "current",
     system_ext_specific: true,
 
     // ML Kit and Play services resolve their components by reflection

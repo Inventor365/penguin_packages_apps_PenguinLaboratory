@@ -4,7 +4,7 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="co.aospa.edgelighting">
+    package="com.penguin.edgelighting">
 
     <application
         android:label="@string/edge_lighting_title"
@@ -22,13 +22,13 @@
             android:name=".EdgeLightingActivity"
             android:exported="true"
             android:label="@string/edge_lighting_title"
-            android:theme="@android:style/Theme.DeviceDefault.Settings">
+            android:theme="@style/Theme.EdgeLighting">
         </activity>
 
         <!-- SystemUI reads the toggle and the cutout from here while dozing -->
         <provider
             android:name=".EdgeLightingProvider"
-            android:authorities="co.aospa.edgelighting.provider"
+            android:authorities="com.penguin.edgelighting.provider"
             android:directBootAware="true"
             android:exported="true"
             android:readPermission="android.permission.STATUS_BAR_SERVICE" />

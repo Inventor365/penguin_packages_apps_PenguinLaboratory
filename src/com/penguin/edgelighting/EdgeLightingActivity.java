@@ -3,9 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package co.aospa.edgelighting;
+package com.penguin.edgelighting;
 
 import android.app.Activity;
+import android.app.BroadcastOptions;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -28,6 +29,7 @@ public class EdgeLightingActivity extends Activity {
 
     private static final String TAG = "EdgeLighting";
     private static final int REQUEST_PICK = 1;
+    private static final String SYSTEMUI = "com.android.systemui";
 
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
@@ -36,6 +38,7 @@ public class EdgeLightingActivity extends Activity {
     private TextView mStatus;
     private ProgressBar mProgress;
     private Button mChoose;
+    private Button mPlay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,10 @@ public class EdgeLightingActivity extends Activity {
         mStatus = findViewById(R.id.status);
         mProgress = findViewById(R.id.progress);
         mChoose = findViewById(R.id.choose);
+        mPlay = findViewById(R.id.play);
+        mPlay.setOnClickListener(v -> sendBroadcast(
+                new Intent(EdgeLightingStore.ACTION_PREVIEW).setPackage(SYSTEMUI), null,
+                BroadcastOptions.makeBasic().setShareIdentityEnabled(true).toBundle()));
 
         mEnabled.setChecked(EdgeLightingStore.isEnabled(this));
         mEnabled.setOnCheckedChangeListener((v, checked) -> {
@@ -73,7 +80,8 @@ public class EdgeLightingActivity extends Activity {
         mExecutor.execute(() -> {
             String error = null;
             try {
-                Cutouts.create(this, uri);
+                Cutouts.create(this, uri, () -> runOnUiThread(
+                        () -> mStatus.setText(R.string.edge_lighting_downloading)));
             } catch (Exception e) {
                 Log.w(TAG, "Couldn't cut out " + uri, e);
                 error = getString(R.string.edge_lighting_cutout_failed);
@@ -91,6 +99,7 @@ public class EdgeLightingActivity extends Activity {
     private void setBusy(boolean busy) {
         mProgress.setVisibility(busy ? View.VISIBLE : View.GONE);
         mChoose.setEnabled(!busy);
+        mPlay.setEnabled(!busy && EdgeLightingStore.cutoutFile(this).exists());
         if (busy) mStatus.setText(R.string.edge_lighting_cutting_out);
     }
 
@@ -103,6 +112,7 @@ public class EdgeLightingActivity extends Activity {
 
     private void updateStatus() {
         boolean hasCutout = EdgeLightingStore.cutoutFile(this).exists();
+        mPlay.setEnabled(hasCutout);
         mStatus.setText(!hasCutout ? R.string.edge_lighting_no_image
                 : mEnabled.isChecked() ? R.string.edge_lighting_ready
                 : R.string.edge_lighting_off);

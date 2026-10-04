@@ -10,6 +10,8 @@
     <string name="edge_lighting_description">When a notification arrives while the screen is off, the subject of your photo falls and bounces across the display.</string>
     <string name="edge_lighting_preview">Cutout preview</string>
     <string name="edge_lighting_choose">Choose image</string>
+    <string name="edge_lighting_play">Preview</string>
+    <string name="edge_lighting_downloading">Downloading the cutout model…</string>
     <string name="edge_lighting_cutting_out">Cutting out the subject…</string>
     <string name="edge_lighting_cutout_failed">Couldn\'t find a subject in that photo. Try another one.</string>
     <string name="edge_lighting_no_image">Choose a photo to cut out its subject</string>

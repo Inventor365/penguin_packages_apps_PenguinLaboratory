@@ -3,16 +3,18 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package co.aospa.edgelighting;
+package com.penguin.edgelighting;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
+import android.os.SystemClock;
 import android.util.Size;
 
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+import com.google.mlkit.common.MlKitException;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.segmentation.subject.SubjectSegmentation;
 import com.google.mlkit.vision.segmentation.subject.SubjectSegmentationResult;
@@ -22,6 +24,7 @@ import com.google.mlkit.vision.segmentation.subject.SubjectSegmenterOptions;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 /** Lifts the main subject out of a photo with ML Kit, the way Gallery's "drag to shape" does. */
 final class Cutouts {
@@ -32,19 +35,20 @@ final class Cutouts {
     private static final int MAX_OUTPUT_PX = 512;
     // Pixels with less coverage than this don't count towards the subject's bounds
     private static final int ALPHA_THRESHOLD = 24;
+    // Play services fetches the model on first use; it takes a few seconds on a good connection
+    private static final long DOWNLOAD_TIMEOUT_MS = 90_000;
+    private static final long DOWNLOAD_POLL_MS = 2_000;
 
     private Cutouts() {}
 
     /** Blocks until the subject of {@code source} is saved as the cutout. Call off the main thread. */
-    static void create(Context context, Uri source) throws Exception {
+    static void create(Context context, Uri source, Runnable onDownloading) throws Exception {
         Bitmap input = decode(context, source);
         SubjectSegmenter segmenter = SubjectSegmentation.getClient(
                 new SubjectSegmenterOptions.Builder().enableForegroundBitmap().build());
         Bitmap foreground;
         try {
-            Task<SubjectSegmentationResult> task =
-                    segmenter.process(InputImage.fromBitmap(input, 0));
-            foreground = Tasks.await(task).getForegroundBitmap();
+            foreground = segment(segmenter, InputImage.fromBitmap(input, 0), onDownloading);
         } finally {
             segmenter.close();
         }
@@ -58,6 +62,32 @@ final class Cutouts {
         }
         if (!tmp.renameTo(out)) throw new IOException("Couldn't save the cutout");
         EdgeLightingStore.notifyChanged(context);
+    }
+
+    /**
+     * Runs the segmenter, waiting out the model download Play services starts on first use.
+     */
+    private static Bitmap segment(SubjectSegmenter segmenter, InputImage image,
+            Runnable onDownloading) throws Exception {
+        long deadline = SystemClock.elapsedRealtime() + DOWNLOAD_TIMEOUT_MS;
+        boolean notified = false;
+        while (true) {
+            try {
+                Task<SubjectSegmentationResult> task = segmenter.process(image);
+                return Tasks.await(task).getForegroundBitmap();
+            } catch (ExecutionException e) {
+                if (!(e.getCause() instanceof MlKitException mlKit)
+                        || mlKit.getErrorCode() != MlKitException.UNAVAILABLE
+                        || SystemClock.elapsedRealtime() > deadline) {
+                    throw e;
+                }
+                if (!notified) {
+                    onDownloading.run();
+                    notified = true;
+                }
+                Thread.sleep(DOWNLOAD_POLL_MS);
+            }
+        }
     }
 
     private static Bitmap decode(Context context, Uri uri) throws IOException {

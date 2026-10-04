@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package co.aospa.edgelighting;
+package com.penguin.edgelighting;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
