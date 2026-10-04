@@ -1,0 +1,154 @@
+//
+// SPDX-FileCopyrightText: Paranoid Android
+// SPDX-License-Identifier: Apache-2.0
+//
+
+android_library_import {
+    name: "EdgeLighting-common-18.10.0",
+    aars: ["libs/common-18.10.0.aar"],
+    sdk_version: "current",
+    min_sdk_version: "21",
+}
+
+java_import {
+    name: "EdgeLighting-firebase-annotations-16.0.0",
+    jars: ["libs/firebase-annotations-16.0.0.jar"],
+    sdk_version: "current",
+}
+
+android_library_import {
+    name: "EdgeLighting-firebase-components-16.1.0",
+    aars: ["libs/firebase-components-16.1.0.aar"],
+    sdk_version: "current",
+    min_sdk_version: "21",
+}
+
+java_import {
+    name: "EdgeLighting-firebase-encoders-16.1.0",
+    jars: ["libs/firebase-encoders-16.1.0.jar"],
+    sdk_version: "current",
+}
+
+android_library_import {
+    name: "EdgeLighting-firebase-encoders-json-17.1.0",
+    aars: ["libs/firebase-encoders-json-17.1.0.aar"],
+    sdk_version: "current",
+    min_sdk_version: "21",
+}
+
+android_library_import {
+    name: "EdgeLighting-image-1.0.0-beta1",
+    aars: ["libs/image-1.0.0-beta1.aar"],
+    sdk_version: "current",
+    min_sdk_version: "21",
+}
+
+java_import {
+    name: "EdgeLighting-javax.inject-1",
+    jars: ["libs/javax.inject-1.jar"],
+    sdk_version: "current",
+}
+
+android_library_import {
+    name: "EdgeLighting-play-services-base-18.1.0",
+    aars: ["libs/play-services-base-18.1.0.aar"],
+    sdk_version: "current",
+    min_sdk_version: "21",
+}
+
+android_library_import {
+    name: "EdgeLighting-play-services-basement-18.1.0",
+    aars: ["libs/play-services-basement-18.1.0.aar"],
+    sdk_version: "current",
+    min_sdk_version: "21",
+}
+
+android_library_import {
+    name: "EdgeLighting-play-services-mlkit-subject-segmentation-16.0.0-beta1",
+    aars: ["libs/play-services-mlkit-subject-segmentation-16.0.0-beta1.aar"],
+    sdk_version: "current",
+    min_sdk_version: "21",
+}
+
+android_library_import {
+    name: "EdgeLighting-play-services-tasks-18.0.2",
+    aars: ["libs/play-services-tasks-18.0.2.aar"],
+    sdk_version: "current",
+    min_sdk_version: "21",
+}
+
+android_library_import {
+    name: "EdgeLighting-transport-api-2.2.1",
+    aars: ["libs/transport-api-2.2.1.aar"],
+    sdk_version: "current",
+    min_sdk_version: "21",
+}
+
+android_library_import {
+    name: "EdgeLighting-transport-backend-cct-2.3.3",
+    aars: ["libs/transport-backend-cct-2.3.3.aar"],
+    sdk_version: "current",
+    min_sdk_version: "21",
+}
+
+android_library_import {
+    name: "EdgeLighting-transport-runtime-2.2.6",
+    aars: ["libs/transport-runtime-2.2.6.aar"],
+    sdk_version: "current",
+    min_sdk_version: "21",
+}
+
+android_library_import {
+    name: "EdgeLighting-vision-common-17.3.0",
+    aars: ["libs/vision-common-17.3.0.aar"],
+    sdk_version: "current",
+    min_sdk_version: "21",
+}
+
+android_library_import {
+    name: "EdgeLighting-vision-interfaces-16.3.0",
+    aars: ["libs/vision-interfaces-16.3.0.aar"],
+    sdk_version: "current",
+    min_sdk_version: "21",
+}
+
+android_app {
+    name: "EdgeLighting",
+
+    srcs: ["src/**/*.java"],
+    resource_dirs: ["res"],
+
+    static_libs: [
+        "EdgeLighting-common-18.10.0",
+        "EdgeLighting-firebase-annotations-16.0.0",
+        "EdgeLighting-firebase-components-16.1.0",
+        "EdgeLighting-firebase-encoders-16.1.0",
+        "EdgeLighting-firebase-encoders-json-17.1.0",
+        "EdgeLighting-image-1.0.0-beta1",
+        "EdgeLighting-javax.inject-1",
+        "EdgeLighting-play-services-base-18.1.0",
+        "EdgeLighting-play-services-basement-18.1.0",
+        "EdgeLighting-play-services-mlkit-subject-segmentation-16.0.0-beta1",
+        "EdgeLighting-play-services-tasks-18.0.2",
+        "EdgeLighting-transport-api-2.2.1",
+        "EdgeLighting-transport-backend-cct-2.3.3",
+        "EdgeLighting-transport-runtime-2.2.6",
+        "EdgeLighting-vision-common-17.3.0",
+        "EdgeLighting-vision-interfaces-16.3.0",
+        "androidx.annotation_annotation",
+        "androidx.appcompat_appcompat",
+        "androidx.collection_collection",
+        "androidx.core_core",
+        "androidx.exifinterface_exifinterface",
+        "androidx.fragment_fragment",
+    ],
+
+    platform_apis: true,
+    certificate: "platform",
+    system_ext_specific: true,
+
+    // ML Kit and Play services resolve their components by reflection
+    optimize: {
+        enabled: false,
+    },
+}

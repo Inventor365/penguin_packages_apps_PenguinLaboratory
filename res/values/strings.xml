@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: Paranoid Android
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="edge_lighting_title">Edge lighting</string>
+    <string name="edge_lighting_summary">Rain a photo\'s subject across the screen when a notification arrives</string>
+    <string name="edge_lighting_switch">Use edge lighting</string>
+    <string name="edge_lighting_description">When a notification arrives while the screen is off, the subject of your photo falls and bounces across the display.</string>
+    <string name="edge_lighting_preview">Cutout preview</string>
+    <string name="edge_lighting_choose">Choose image</string>
+    <string name="edge_lighting_cutting_out">Cutting out the subject…</string>
+    <string name="edge_lighting_cutout_failed">Couldn\'t find a subject in that photo. Try another one.</string>
+    <string name="edge_lighting_no_image">Choose a photo to cut out its subject</string>
+    <string name="edge_lighting_ready">Plays on notifications while the screen is off</string>
+    <string name="edge_lighting_off">Turn on to play on notifications</string>
+</resources>

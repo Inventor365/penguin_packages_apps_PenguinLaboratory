@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: Paranoid Android
+     SPDX-License-Identifier: Apache-2.0
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="co.aospa.edgelighting">
+
+    <application
+        android:label="@string/edge_lighting_title"
+        android:icon="@drawable/ic_edge_lighting"
+        android:allowBackup="false"
+        android:defaultToDeviceProtectedStorage="true"
+        android:directBootAware="true">
+
+        <!-- Fetch the segmentation model with Play services as soon as we're installed -->
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="subject_segment" />
+
+        <activity
+            android:name=".EdgeLightingActivity"
+            android:exported="true"
+            android:label="@string/edge_lighting_title"
+            android:theme="@android:style/Theme.DeviceDefault.Settings">
+        </activity>
+
+        <!-- SystemUI reads the toggle and the cutout from here while dozing -->
+        <provider
+            android:name=".EdgeLightingProvider"
+            android:authorities="co.aospa.edgelighting.provider"
+            android:directBootAware="true"
+            android:exported="true"
+            android:readPermission="android.permission.STATUS_BAR_SERVICE" />
+
+    </application>
+</manifest>
