@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     SPDX-FileCopyrightText: Paranoid Android
+     Copyright (C) 2026 The PenguinOS Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.penguin.edgelighting">
+    package="com.penguin.laboratory">
+
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
     <application
-        android:label="@string/edge_lighting_title"
-        android:icon="@drawable/ic_edge_lighting"
+        android:label="@string/laboratory_title"
+        android:icon="@drawable/ic_laboratory"
         android:allowBackup="false"
         android:defaultToDeviceProtectedStorage="true"
         android:directBootAware="true">
@@ -19,16 +21,21 @@
             android:value="subject_segment" />
 
         <activity
-            android:name=".EdgeLightingActivity"
+            android:name=".LaboratoryActivity"
+            android:exported="true"
+            android:label="@string/laboratory_title"
+            android:theme="@style/Theme.Laboratory" />
+
+        <activity
+            android:name=".edgelighting.EdgeLightingActivity"
             android:exported="true"
             android:label="@string/edge_lighting_title"
-            android:theme="@style/Theme.EdgeLighting">
-        </activity>
+            android:theme="@style/Theme.Laboratory" />
 
-        <!-- SystemUI reads the toggle and the cutout from here while dozing -->
+        <!-- SystemUI reads the edge lighting style and images from here while dozing -->
         <provider
-            android:name=".EdgeLightingProvider"
-            android:authorities="com.penguin.edgelighting.provider"
+            android:name=".edgelighting.EdgeLightingProvider"
+            android:authorities="com.penguin.laboratory.provider"
             android:directBootAware="true"
             android:exported="true"
             android:readPermission="android.permission.STATUS_BAR_SERVICE" />

@@ -1,20 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     SPDX-FileCopyrightText: Paranoid Android
+     Copyright (C) 2026 The PenguinOS Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
+    <string name="laboratory_title">Penguin Laboratory</string>
+    <string name="laboratory_summary">Experiments for your lock screen and notifications</string>
+    <string name="edge_lighting_entry_summary">Rain, snow or bubbles of a photo\'s subject when a notification arrives</string>
     <string name="edge_lighting_title">Edge lighting</string>
     <string name="edge_lighting_summary">Rain a photo\'s subject across the screen when a notification arrives</string>
     <string name="edge_lighting_switch">Use edge lighting</string>
-    <string name="edge_lighting_description">When a notification arrives while the screen is off, the subject of your photo falls and bounces across the display.</string>
+    <string name="edge_lighting_description">When a notification arrives, the image you pick falls, floats or bursts across the display.</string>
     <string name="edge_lighting_preview">Cutout preview</string>
     <string name="edge_lighting_choose">Choose image</string>
     <string name="edge_lighting_play">Preview</string>
     <string name="edge_lighting_downloading">Downloading the cutout model…</string>
     <string name="edge_lighting_cutting_out">Cutting out the subject…</string>
     <string name="edge_lighting_cutout_failed">Couldn\'t find a subject in that photo. Try another one.</string>
-    <string name="edge_lighting_no_image">Choose a photo to cut out its subject</string>
-    <string name="edge_lighting_ready">Plays on notifications while the screen is off</string>
+    <string name="edge_lighting_no_image">Add a photo or pick a sticker below</string>
+    <string name="edge_lighting_ready">Plays when a notification arrives</string>
     <string name="edge_lighting_off">Turn on to play on notifications</string>
+    <string name="edge_lighting_image">Image</string>
+    <string name="edge_lighting_add_photo">Add photo</string>
+    <string name="edge_lighting_delete_image">Delete this image?</string>
+    <string name="edge_lighting_delete">Delete</string>
+    <string name="edge_lighting_color">Colour</string>
+    <string name="edge_lighting_effect">Effect</string>
+    <string name="edge_lighting_effect_rain">Rain</string>
+    <string name="edge_lighting_effect_snow">Snow</string>
+    <string name="edge_lighting_effect_bubbles">Bubbles</string>
+    <string name="edge_lighting_effect_burst">Burst</string>
+    <string name="edge_lighting_size">Size</string>
+    <string name="edge_lighting_amount">Amount</string>
+    <string name="edge_lighting_duration">Duration</string>
+    <string name="edge_lighting_rotation">Rotation</string>
+    <string name="edge_lighting_app_icon">Show app icon instead of image</string>
+    <string name="edge_lighting_screen_off_only">Only when screen is off</string>
+    <string name="edge_lighting_keywords">Style by keyword</string>
+    <string name="edge_lighting_keywords_description">Play a different image when a notification\'s title or text contains a word. Uses the image selected above.</string>
+    <string name="edge_lighting_add_keyword">Add keyword</string>
+    <string name="edge_lighting_keyword_hint">Keyword</string>
+    <string name="edge_lighting_keyword_needs_image">Select an image first</string>
+    <string name="edge_lighting_remove_keyword">Remove keyword?</string>
+    <string name="edge_lighting_remove">Remove</string>
 </resources>

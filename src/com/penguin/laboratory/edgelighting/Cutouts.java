@@ -1,9 +1,9 @@
 /*
- * SPDX-FileCopyrightText: Paranoid Android
+ * Copyright (C) 2026 The PenguinOS Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.penguin.edgelighting;
+package com.penguin.laboratory.edgelighting;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -55,13 +55,19 @@ final class Cutouts {
         if (foreground == null) throw new IOException("No subject found");
 
         Bitmap subject = scaleDown(trim(foreground), MAX_OUTPUT_PX);
-        File out = EdgeLightingStore.cutoutFile(context);
+        String id = "cutout-" + System.currentTimeMillis();
+        save(context, subject, id);
+        EdgeLightingStore.put(context, EdgeLightingStore.KEY_SELECTED, id);
+    }
+
+    /** Writes {@code bitmap} as image {@code id}, replacing it atomically. */
+    static void save(Context context, Bitmap bitmap, String id) throws IOException {
+        File out = EdgeLightingStore.image(context, id);
         File tmp = new File(out.getPath() + ".tmp");
         try (FileOutputStream os = new FileOutputStream(tmp)) {
-            subject.compress(Bitmap.CompressFormat.PNG, 100, os);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
         }
-        if (!tmp.renameTo(out)) throw new IOException("Couldn't save the cutout");
-        EdgeLightingStore.notifyChanged(context);
+        if (!tmp.renameTo(out)) throw new IOException("Couldn't save " + id);
     }
 
     /**

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2026 The PenguinOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:id="@+id/experiments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="32dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="48dp"
+            android:paddingHorizontal="4dp"
+            android:text="@string/laboratory_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="34sp" />
+
+        <TextView
+            style="@style/Description"
+            android:text="@string/laboratory_summary" />
+
+        <LinearLayout
+            android:id="@+id/edge_lighting"
+            style="@style/Card.Entry">
+
+            <TextView
+                style="@style/Card.Title"
+                android:text="@string/edge_lighting_title" />
+
+            <TextView
+                style="@style/Card.Summary"
+                android:text="@string/edge_lighting_entry_summary" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

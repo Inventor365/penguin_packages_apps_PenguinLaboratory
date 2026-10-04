@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     SPDX-FileCopyrightText: Paranoid Android
+     Copyright (C) 2026 The PenguinOS Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
-        android:paddingBottom="24dp">
+        android:paddingBottom="32dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -27,26 +27,16 @@
 
         <Switch
             android:id="@+id/enabled"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/card_background"
-            android:minHeight="72dp"
-            android:paddingHorizontal="24dp"
-            android:text="@string/edge_lighting_switch"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            style="@style/Card.Switch"
+            android:text="@string/edge_lighting_switch" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="24dp"
-            android:paddingHorizontal="4dp"
-            android:text="@string/edge_lighting_description"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            style="@style/Description"
+            android:text="@string/edge_lighting_description" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="240dp"
             android:background="@drawable/preview_background">
 
             <ImageView
@@ -73,26 +63,118 @@
             android:gravity="center_horizontal"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <LinearLayout
+        <Button
+            android:id="@+id/play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:text="@string/edge_lighting_play" />
+
+        <TextView
+            style="@style/Header"
+            android:text="@string/edge_lighting_image" />
+
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:scrollbars="none">
 
-            <Button
-                android:id="@+id/choose"
+            <LinearLayout
+                android:id="@+id/images"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                android:text="@string/edge_lighting_choose" />
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
 
-            <Button
-                android:id="@+id/play"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/edge_lighting_play" />
-        </LinearLayout>
+        <TextView
+            style="@style/Header"
+            android:text="@string/edge_lighting_color" />
+
+        <LinearLayout
+            android:id="@+id/colors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+
+        <TextView
+            style="@style/Header"
+            android:text="@string/edge_lighting_effect" />
+
+        <RadioGroup
+            android:id="@+id/effects"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+
+        <TextView
+            style="@style/Header"
+            android:text="@string/edge_lighting_size" />
+
+        <SeekBar
+            android:id="@+id/size"
+            style="@style/Slider"
+            android:max="3" />
+
+        <TextView
+            style="@style/Header"
+            android:text="@string/edge_lighting_amount" />
+
+        <SeekBar
+            android:id="@+id/amount"
+            style="@style/Slider"
+            android:max="2" />
+
+        <TextView
+            style="@style/Header"
+            android:text="@string/edge_lighting_duration" />
+
+        <SeekBar
+            android:id="@+id/duration"
+            style="@style/Slider"
+            android:max="2" />
+
+        <TextView
+            style="@style/Header"
+            android:text="@string/edge_lighting_rotation" />
+
+        <SeekBar
+            android:id="@+id/rotation"
+            style="@style/Slider"
+            android:max="2" />
+
+        <Switch
+            android:id="@+id/app_icon"
+            style="@style/Card.Switch"
+            android:layout_marginTop="28dp"
+            android:text="@string/edge_lighting_app_icon" />
+
+        <Switch
+            android:id="@+id/screen_off_only"
+            style="@style/Card.Switch"
+            android:layout_marginTop="12dp"
+            android:text="@string/edge_lighting_screen_off_only" />
+
+        <TextView
+            style="@style/Header"
+            android:text="@string/edge_lighting_keywords" />
+
+        <TextView
+            style="@style/Description"
+            android:layout_marginTop="0dp"
+            android:text="@string/edge_lighting_keywords_description" />
+
+        <LinearLayout
+            android:id="@+id/keywords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <Button
+            android:id="@+id/add_keyword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edge_lighting_add_keyword" />
 
     </LinearLayout>
 </ScrollView>
