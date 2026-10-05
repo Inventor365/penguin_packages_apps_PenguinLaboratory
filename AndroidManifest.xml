@@ -7,6 +7,8 @@
     package="com.penguin.laboratory">
 
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <!-- DeX's switches are secure settings the framework and SystemUI read -->
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
 
     <application
         android:label="@string/laboratory_title"
@@ -19,6 +21,12 @@
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="subject_segment" />
+
+        <activity
+            android:name=".dex.DexActivity"
+            android:exported="false"
+            android:label="@string/dex_title"
+            android:theme="@style/Theme.Laboratory" />
 
         <activity
             android:name=".LaboratoryActivity"

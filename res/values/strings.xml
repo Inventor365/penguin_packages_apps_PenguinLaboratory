@@ -133,4 +133,20 @@
     <string name="level_slow">Slow</string>
     <string name="level_normal">Normal</string>
     <string name="level_fast">Fast</string>
+
+    <!-- DeX -->
+    <string name="dex_title">DeX</string>
+    <string name="dex_entry_summary">Use your phone as a desktop on another screen</string>
+    <string name="dex_use">Use DeX</string>
+    <string name="dex_use_summary">A connected screen, or your PC with the PenguinOS DeX app, gets a desktop of its own while your phone stays as it is</string>
+    <string name="dex_features">On the desktop</string>
+    <string name="dex_dock">Dock</string>
+    <string name="dex_dock_summary">Apps in a floating dock along the bottom</string>
+    <string name="dex_launchpad">Launchpad</string>
+    <string name="dex_launchpad_summary">Every app in pages of large icons over the desktop</string>
+    <string name="dex_control_centre">Control Centre</string>
+    <string name="dex_control_centre_summary">The status bar opens quick controls instead of the notification shade</string>
+    <string name="dex_touchpad">Phone as touchpad</string>
+    <string name="dex_touchpad_summary">Offer to move the desktop\'s pointer from your phone</string>
+    <string name="dex_pc_hint">To use DeX on a Windows PC, turn on USB debugging and open the PenguinOS DeX app on the PC.</string>
 </resources>

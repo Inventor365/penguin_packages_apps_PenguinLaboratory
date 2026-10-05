@@ -52,6 +52,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
+import com.penguin.laboratory.dex.DexActivity
+import com.penguin.laboratory.dex.DexStore
 import com.penguin.laboratory.edgelighting.EdgeLightingActivity
 import com.penguin.laboratory.edgelighting.EdgeLightingStore
 import com.penguin.laboratory.ui.LabTheme
@@ -75,6 +77,7 @@ class LaboratoryActivity : ComponentActivity() {
         LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { generation++ }
         val edgeOn = remember(generation) { EdgeLightingStore.isEnabled(this) }
         val wallpapers = remember(generation) { WonderlandStore.projects(this).size }
+        val dexOn = remember(generation) { DexStore.isEnabled(this) }
 
         val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
         Scaffold(
@@ -140,6 +143,25 @@ class LaboratoryActivity : ComponentActivity() {
                         contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
                     ) {
                         startActivity(Intent(this@LaboratoryActivity, WonderlandActivity::class.java))
+                    }
+                }
+                item {
+                    Experiment(
+                        title = stringResource(R.string.dex_title),
+                        summary = stringResource(R.string.dex_entry_summary),
+                        status =
+                            stringResource(
+                                if (dexOn) R.string.laboratory_status_on
+                                else R.string.laboratory_status_off
+                            ),
+                        active = dexOn,
+                        icon = R.drawable.materialsymbols_ic_desktop_windows_rounded_filled,
+                        restShape = MaterialShapes.Slanted,
+                        pressedShape = MaterialShapes.Pill,
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    ) {
+                        startActivity(Intent(this@LaboratoryActivity, DexActivity::class.java))
                     }
                 }
             }

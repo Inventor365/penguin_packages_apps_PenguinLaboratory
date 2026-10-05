@@ -159,9 +159,19 @@ android_app {
     // segmentation runs from
     sdk_version: "current",
     system_ext_specific: true,
+    // For WRITE_SECURE_SETTINGS, which DeX's switches need
+    privileged: true,
+    required: ["privapp_permissions_com.penguin.laboratory"],
 
     // ML Kit and Play services resolve their components by reflection
     optimize: {
         enabled: false,
     },
+}
+
+prebuilt_etc {
+    name: "privapp_permissions_com.penguin.laboratory",
+    src: "privapp_permissions_com.penguin.laboratory.xml",
+    sub_dir: "permissions",
+    system_ext_specific: true,
 }
