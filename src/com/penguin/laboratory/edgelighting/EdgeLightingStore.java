@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 /** Everything the settings screen saves and the provider hands to SystemUI. */
-final class EdgeLightingStore {
+public final class EdgeLightingStore {
 
     static final String AUTHORITY = "com.penguin.laboratory.provider";
     static final Uri STATE_URI = Uri.parse("content://" + AUTHORITY + "/state");
@@ -56,7 +56,7 @@ final class EdgeLightingStore {
                 .getSharedPreferences(PREFS, Context.MODE_PRIVATE);
     }
 
-    static boolean isEnabled(Context context) {
+    public static boolean isEnabled(Context context) {
         return prefs(context).getBoolean(KEY_ENABLED, false);
     }
 

@@ -115,7 +115,10 @@ android_library_import {
 android_app {
     name: "PenguinLaboratory",
 
-    srcs: ["src/**/*.java"],
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt",
+    ],
     resource_dirs: ["res"],
 
     static_libs: [
@@ -135,8 +138,17 @@ android_app {
         "PenguinLaboratory-transport-runtime-2.2.6",
         "PenguinLaboratory-vision-common-17.3.0",
         "PenguinLaboratory-vision-interfaces-16.3.0",
+        "androidx.activity_activity-compose",
         "androidx.annotation_annotation",
         "androidx.appcompat_appcompat",
+        "androidx.compose.foundation_foundation",
+        "androidx.compose.material3_material3",
+        "androidx.compose.runtime_runtime",
+        "androidx.compose.ui_ui",
+        "androidx.graphics_graphics-shapes",
+        "androidx.lifecycle_lifecycle-runtime-compose",
+        "com.composables_icons-material-symbols-rounded-filled-android",
+        "kotlinx_coroutines_android",
         "androidx.collection_collection",
         "androidx.core_core",
         "androidx.exifinterface_exifinterface",
