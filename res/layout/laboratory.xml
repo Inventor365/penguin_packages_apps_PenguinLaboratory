@@ -42,5 +42,18 @@
                 android:text="@string/edge_lighting_entry_summary" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/wonderland"
+            style="@style/Card.Entry">
+
+            <TextView
+                style="@style/Card.Title"
+                android:text="@string/wonderland_title" />
+
+            <TextView
+                style="@style/Card.Summary"
+                android:text="@string/wonderland_entry_summary" />
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

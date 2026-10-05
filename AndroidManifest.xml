@@ -32,6 +32,32 @@
             android:label="@string/edge_lighting_title"
             android:theme="@style/Theme.Laboratory" />
 
+        <activity
+            android:name=".wonderland.WonderlandActivity"
+            android:exported="true"
+            android:label="@string/wonderland_title"
+            android:theme="@style/Theme.Laboratory" />
+
+        <activity
+            android:name=".wonderland.WonderlandEditorActivity"
+            android:exported="false"
+            android:label="@string/wonderland_title"
+            android:theme="@style/Theme.Laboratory"
+            android:windowSoftInputMode="adjustResize" />
+
+        <service
+            android:name=".wonderland.WonderlandWallpaperService"
+            android:exported="true"
+            android:label="@string/wonderland_title"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/wonderland_wallpaper" />
+        </service>
+
         <!-- SystemUI reads the edge lighting style and images from here while dozing -->
         <provider
             android:name=".edgelighting.EdgeLightingProvider"

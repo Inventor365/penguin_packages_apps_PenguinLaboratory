@@ -8,6 +8,8 @@ package com.penguin.laboratory.edgelighting;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.net.Uri;
 import android.os.SystemClock;
 import android.util.Size;
@@ -27,7 +29,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 /** Lifts the main subject out of a photo with ML Kit, the way Gallery's "drag to shape" does. */
-final class Cutouts {
+public final class Cutouts {
 
     // The segmenter is slow and no more accurate on bigger inputs
     private static final int MAX_INPUT_PX = 1600;
@@ -43,6 +45,27 @@ final class Cutouts {
 
     /** Blocks until the subject of {@code source} is saved as the cutout. Call off the main thread. */
     static void create(Context context, Uri source, Runnable onDownloading) throws Exception {
+        Bitmap subject = scaleDown(subject(context, source, onDownloading), MAX_OUTPUT_PX);
+        String id = "cutout-" + System.currentTimeMillis();
+        save(context, subject, id);
+        EdgeLightingStore.put(context, EdgeLightingStore.KEY_SELECTED, id);
+    }
+
+    /**
+     * Blocks until the subject of {@code source} is lifted out, cropped to its bounds. Call off
+     * the main thread.
+     */
+    public static Bitmap subject(Context context, Uri source, Runnable onDownloading)
+            throws Exception {
+        return subject(context, source, onDownloading, null);
+    }
+
+    /**
+     * Like {@link #subject(Context, Uri, Runnable)}, and sets {@code bounds} to where the subject
+     * was in the photo, as fractions of its size.
+     */
+    public static Bitmap subject(Context context, Uri source, Runnable onDownloading,
+            RectF bounds) throws Exception {
         Bitmap input = decode(context, source);
         SubjectSegmenter segmenter = SubjectSegmentation.getClient(
                 new SubjectSegmenterOptions.Builder().enableForegroundBitmap().build());
@@ -53,11 +76,14 @@ final class Cutouts {
             segmenter.close();
         }
         if (foreground == null) throw new IOException("No subject found");
-
-        Bitmap subject = scaleDown(trim(foreground), MAX_OUTPUT_PX);
-        String id = "cutout-" + System.currentTimeMillis();
-        save(context, subject, id);
-        EdgeLightingStore.put(context, EdgeLightingStore.KEY_SELECTED, id);
+        Rect box = bounds(foreground);
+        if (bounds != null) {
+            bounds.set(box.left / (float) foreground.getWidth(),
+                    box.top / (float) foreground.getHeight(),
+                    box.right / (float) foreground.getWidth(),
+                    box.bottom / (float) foreground.getHeight());
+        }
+        return Bitmap.createBitmap(foreground, box.left, box.top, box.width(), box.height());
     }
 
     /** Writes {@code bitmap} as image {@code id}, replacing it atomically. */
@@ -96,7 +122,8 @@ final class Cutouts {
         }
     }
 
-    private static Bitmap decode(Context context, Uri uri) throws IOException {
+    /** Decodes {@code uri} no larger than the segmenter needs. */
+    public static Bitmap decode(Context context, Uri uri) throws IOException {
         return ImageDecoder.decodeBitmap(
                 ImageDecoder.createSource(context.getContentResolver(), uri),
                 (decoder, info, src) -> {
@@ -111,8 +138,8 @@ final class Cutouts {
                 });
     }
 
-    /** Crops away the transparent margin around the subject. */
-    private static Bitmap trim(Bitmap bitmap) throws IOException {
+    /** The subject's bounds, leaving out the transparent margin around it. */
+    private static Rect bounds(Bitmap bitmap) throws IOException {
         int w = bitmap.getWidth(), h = bitmap.getHeight();
         int[] row = new int[w];
         int left = w, top = h, right = -1, bottom = -1;
@@ -128,10 +155,10 @@ final class Cutouts {
             }
         }
         if (right < 0) throw new IOException("No subject found");
-        return Bitmap.createBitmap(bitmap, left, top, right - left + 1, bottom - top + 1);
+        return new Rect(left, top, right + 1, bottom + 1);
     }
 
-    private static Bitmap scaleDown(Bitmap bitmap, int maxPx) {
+    public static Bitmap scaleDown(Bitmap bitmap, int maxPx) {
         int longest = Math.max(bitmap.getWidth(), bitmap.getHeight());
         if (longest <= maxPx) return bitmap;
         float scale = (float) maxPx / longest;
