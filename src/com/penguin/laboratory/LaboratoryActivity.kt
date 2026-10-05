@@ -55,6 +55,8 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import com.penguin.laboratory.dex.DexActivity
 import com.penguin.laboratory.dex.DexStore
 import com.penguin.laboratory.edgelighting.EdgeLightingActivity
+import com.penguin.laboratory.glass.LiquidGlassActivity
+import com.penguin.laboratory.glass.LiquidGlassStore
 import com.penguin.laboratory.edgelighting.EdgeLightingStore
 import com.penguin.laboratory.ui.LabTheme
 import com.penguin.laboratory.ui.rememberMorphShape
@@ -78,6 +80,7 @@ class LaboratoryActivity : ComponentActivity() {
         val edgeOn = remember(generation) { EdgeLightingStore.isEnabled(this) }
         val wallpapers = remember(generation) { WonderlandStore.projects(this).size }
         val dexOn = remember(generation) { DexStore.isEnabled(this) }
+        val glassOn = remember(generation) { LiquidGlassStore.isEnabled(this) }
 
         val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
         Scaffold(
@@ -162,6 +165,25 @@ class LaboratoryActivity : ComponentActivity() {
                         contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
                     ) {
                         startActivity(Intent(this@LaboratoryActivity, DexActivity::class.java))
+                    }
+                }
+                item {
+                    Experiment(
+                        title = stringResource(R.string.liquid_glass_title),
+                        summary = stringResource(R.string.liquid_glass_entry_summary),
+                        status =
+                            stringResource(
+                                if (glassOn) R.string.laboratory_status_on
+                                else R.string.laboratory_status_off
+                            ),
+                        active = glassOn,
+                        icon = R.drawable.materialsymbols_ic_water_drop_rounded_filled,
+                        restShape = MaterialShapes.Gem,
+                        pressedShape = MaterialShapes.Circle,
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    ) {
+                        startActivity(Intent(this@LaboratoryActivity, LiquidGlassActivity::class.java))
                     }
                 }
             }

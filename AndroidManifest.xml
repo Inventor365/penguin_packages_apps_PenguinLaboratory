@@ -23,6 +23,12 @@
             android:value="subject_segment" />
 
         <activity
+            android:name=".glass.LiquidGlassActivity"
+            android:exported="false"
+            android:label="@string/liquid_glass_title"
+            android:theme="@style/Theme.Laboratory" />
+
+        <activity
             android:name=".dex.DexActivity"
             android:exported="false"
             android:label="@string/dex_title"
