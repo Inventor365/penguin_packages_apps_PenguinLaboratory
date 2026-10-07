@@ -156,4 +156,49 @@
     <string name="liquid_glass_use">Use Liquid Glass</string>
     <string name="liquid_glass_use_summary">The system\'s frosted surfaces become glass: their edges bend what\'s behind them and their rims catch the light</string>
     <string name="liquid_glass_hint">Applies to every blurred surface, such as the DeX Control Centre and dock, at once.</string>
+
+    <!-- Styles -->
+    <string name="styles_title">Styles</string>
+    <string name="styles_entry_summary">How Quick Settings, the volume panel and the power menu look</string>
+    <plurals name="styles_status">
+        <item quantity="one">%d style changed</item>
+        <item quantity="other">%d styles changed</item>
+    </plurals>
+    <string name="styles_default">Default</string>
+    <string name="styles_qs_title">Quick Settings</string>
+    <string name="styles_qs_penguin">Penguin</string>
+    <string name="styles_qs_myui">MyUI</string>
+    <string name="styles_qs_harmony">HarmonyOS</string>
+    <string name="styles_qs_oneui_active">Unavailable while One UI Quick Settings is on in Experiments</string>
+    <string name="styles_qs_folder">Connectivity folder</string>
+    <string name="styles_qs_folder_summary">Group Wi-Fi, mobile data and Bluetooth into one Quick Settings card</string>
+    <string name="styles_volume_title">Volume panel</string>
+    <string name="styles_volume_expandable">Expandable</string>
+    <string name="styles_volume_oneui">One UI</string>
+    <string name="styles_volume_myui">MyUI</string>
+    <string name="styles_power_title">Power menu</string>
+    <string name="styles_power_penguin">Penguin</string>
+    <string name="styles_power_ios">iOS</string>
+
+    <!-- Experiments -->
+    <string name="experiments_title">Experiments</string>
+    <string name="experiments_entry_summary">Features that are still being worked on</string>
+    <plurals name="experiments_status">
+        <item quantity="one">%d on</item>
+        <item quantity="other">%d on</item>
+    </plurals>
+    <string name="experiments_lock_screen">Lock screen</string>
+    <string name="experiments_system">System</string>
+    <string name="experiments_ls_media_expand">iOS-style lock screen media art</string>
+    <string name="experiments_ls_media_expand_summary">Tap the artwork in the lock screen player to fill the lock screen with it, and tap it again to go back</string>
+    <string name="experiments_ls_media_motion_art">Animated album art</string>
+    <string name="experiments_ls_media_motion_art_summary">Loop the album\'s motion artwork in the expanded player when Apple has one. Looks up the playing song\'s artist and title on Apple Music</string>
+    <string name="experiments_depth_floating">Floating depth wallpaper</string>
+    <string name="experiments_depth_floating_summary">With a depth wallpaper, the lock screen clock floats between the wallpaper and its subject as you tilt the phone</string>
+    <string name="experiments_qs_oneui">One UI Quick Settings</string>
+    <string name="experiments_qs_oneui_summary">Replaces Quick Settings with a One UI style panel and always uses the split notification and Quick Settings shade. Turning it off restores your previous style and shade.</string>
+    <string name="experiments_back_to_app">Back to app</string>
+    <string name="experiments_back_to_app_summary">When an app opens another, show the app you came from in the status bar and tap it to go back</string>
+    <string name="experiments_recents_frequent_apps">Frequently used apps in recents</string>
+    <string name="experiments_recents_frequent_apps_summary">Show the four apps you used most this week below recent apps</string>
 </resources>

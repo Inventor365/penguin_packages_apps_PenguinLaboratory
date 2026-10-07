@@ -58,6 +58,10 @@ import com.penguin.laboratory.edgelighting.EdgeLightingActivity
 import com.penguin.laboratory.glass.LiquidGlassActivity
 import com.penguin.laboratory.glass.LiquidGlassStore
 import com.penguin.laboratory.edgelighting.EdgeLightingStore
+import com.penguin.laboratory.experiments.ExperimentsActivity
+import com.penguin.laboratory.experiments.ExperimentsStore
+import com.penguin.laboratory.styles.StylesActivity
+import com.penguin.laboratory.styles.StylesStore
 import com.penguin.laboratory.ui.LabTheme
 import com.penguin.laboratory.ui.rememberMorphShape
 import com.penguin.laboratory.wonderland.WonderlandActivity
@@ -81,6 +85,8 @@ class LaboratoryActivity : ComponentActivity() {
         val wallpapers = remember(generation) { WonderlandStore.projects(this).size }
         val dexOn = remember(generation) { DexStore.isEnabled(this) }
         val glassOn = remember(generation) { LiquidGlassStore.isEnabled(this) }
+        val stylesChanged = remember(generation) { StylesStore.customised(this) }
+        val experimentsOn = remember(generation) { ExperimentsStore.enabledCount(this) }
 
         val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
         Scaffold(
@@ -184,6 +190,46 @@ class LaboratoryActivity : ComponentActivity() {
                         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                     ) {
                         startActivity(Intent(this@LaboratoryActivity, LiquidGlassActivity::class.java))
+                    }
+                }
+                item {
+                    Experiment(
+                        title = stringResource(R.string.styles_title),
+                        summary = stringResource(R.string.styles_entry_summary),
+                        status =
+                            resources.getQuantityString(
+                                R.plurals.styles_status,
+                                stylesChanged,
+                                stylesChanged,
+                            ),
+                        active = stylesChanged > 0,
+                        icon = R.drawable.materialsymbols_ic_palette_rounded_filled,
+                        restShape = MaterialShapes.Clover4Leaf,
+                        pressedShape = MaterialShapes.Square,
+                        containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                    ) {
+                        startActivity(Intent(this@LaboratoryActivity, StylesActivity::class.java))
+                    }
+                }
+                item {
+                    Experiment(
+                        title = stringResource(R.string.experiments_title),
+                        summary = stringResource(R.string.experiments_entry_summary),
+                        status =
+                            resources.getQuantityString(
+                                R.plurals.experiments_status,
+                                experimentsOn,
+                                experimentsOn,
+                            ),
+                        active = experimentsOn > 0,
+                        icon = R.drawable.materialsymbols_ic_science_rounded_filled,
+                        restShape = MaterialShapes.Puffy,
+                        pressedShape = MaterialShapes.Cookie4Sided,
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    ) {
+                        startActivity(Intent(this@LaboratoryActivity, ExperimentsActivity::class.java))
                     }
                 }
             }

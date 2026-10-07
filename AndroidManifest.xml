@@ -29,6 +29,18 @@
             android:theme="@style/Theme.Laboratory" />
 
         <activity
+            android:name=".styles.StylesActivity"
+            android:exported="false"
+            android:label="@string/styles_title"
+            android:theme="@style/Theme.Laboratory" />
+
+        <activity
+            android:name=".experiments.ExperimentsActivity"
+            android:exported="false"
+            android:label="@string/experiments_title"
+            android:theme="@style/Theme.Laboratory" />
+
+        <activity
             android:name=".dex.DexActivity"
             android:exported="false"
             android:label="@string/dex_title"
