@@ -8,6 +8,7 @@
 package com.penguin.laboratory.glass
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.ComponentActivity
@@ -19,6 +20,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItemDefaults
+import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumFlexibleTopAppBar
@@ -37,6 +40,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.penguin.laboratory.R
 import com.penguin.laboratory.ui.LabTheme
+import com.penguin.laboratory.ui.SectionHeader
 import com.penguin.laboratory.ui.SegmentedGroup
 import com.penguin.laboratory.ui.SwitchItem
 
@@ -63,6 +67,7 @@ class LiquidGlassActivity : ComponentActivity() {
     @Composable
     private fun LiquidGlass() {
         var enabled by remember { mutableStateOf(LiquidGlassStore.isEnabled(this)) }
+        var tabBars by remember { mutableStateOf(TabBarStore.isEnabled(this)) }
         val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
         Scaffold(
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -108,6 +113,43 @@ class LiquidGlassActivity : ComponentActivity() {
                             count = 1,
                             icon = R.drawable.materialsymbols_ic_water_drop_rounded_filled,
                         )
+                    }
+                }
+                item { SectionHeader(stringResource(R.string.tab_bars_header)) }
+                item {
+                    SegmentedGroup {
+                        SwitchItem(
+                            title = stringResource(R.string.tab_bars_use),
+                            supporting = stringResource(R.string.tab_bars_use_summary),
+                            checked = tabBars,
+                            onCheckedChange = {
+                                TabBarStore.setEnabled(this@LiquidGlassActivity, it)
+                                tabBars = it
+                            },
+                            index = 0,
+                            count = 2,
+                            icon = R.drawable.materialsymbols_ic_dock_to_bottom_rounded_filled,
+                        )
+                        SegmentedListItem(
+                            onClick = {
+                                startActivity(
+                                    Intent(this@LiquidGlassActivity, TabBarAppsActivity::class.java)
+                                )
+                            },
+                            shapes = ListItemDefaults.segmentedShapes(1, 2),
+                            enabled = tabBars,
+                            leadingContent = {
+                                Icon(
+                                    painterResource(R.drawable.materialsymbols_ic_apps_rounded_filled),
+                                    contentDescription = null,
+                                )
+                            },
+                            supportingContent = {
+                                Text(stringResource(R.string.tab_bars_apps_summary))
+                            },
+                        ) {
+                            Text(stringResource(R.string.tab_bars_apps_title))
+                        }
                     }
                 }
                 item {

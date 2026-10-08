@@ -156,6 +156,14 @@
     <string name="liquid_glass_use">Use Liquid Glass</string>
     <string name="liquid_glass_use_summary">The system\'s frosted surfaces become glass: their edges bend what\'s behind them and their rims catch the light</string>
     <string name="liquid_glass_hint">Applies to every blurred surface, such as the DeX Control Centre and dock, at once.</string>
+    <string name="tab_bars_header">In apps</string>
+    <string name="tab_bars_use">Glass tab bars</string>
+    <string name="tab_bars_use_summary">Bottom bars in apps become a floating glass capsule with a sliding selection, as on iOS. Apps pick it up the next time they open</string>
+    <string name="tab_bars_apps_title">Choose apps</string>
+    <string name="tab_bars_apps_summary">Turn glass off for an app, or let its content run under the bar</string>
+    <string name="tab_bars_mode_off">Off</string>
+    <string name="tab_bars_mode_glass">Glass</string>
+    <string name="tab_bars_mode_float">Float</string>
 
     <!-- Styles -->
     <string name="styles_title">Styles</string>

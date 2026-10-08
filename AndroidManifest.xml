@@ -29,6 +29,12 @@
             android:theme="@style/Theme.Laboratory" />
 
         <activity
+            android:name=".glass.TabBarAppsActivity"
+            android:exported="false"
+            android:label="@string/tab_bars_apps_title"
+            android:theme="@style/Theme.Laboratory" />
+
+        <activity
             android:name=".styles.StylesActivity"
             android:exported="false"
             android:label="@string/styles_title"
