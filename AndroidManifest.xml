@@ -10,12 +10,21 @@
     <!-- DeX's switches are secure settings the framework and SystemUI read -->
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
 
+    <!-- The tab bar list offers every launchable app that has shown a bar -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
     <application
         android:label="@string/laboratory_title"
         android:icon="@drawable/ic_laboratory"
         android:allowBackup="false"
         android:defaultToDeviceProtectedStorage="true"
-        android:directBootAware="true">
+        android:directBootAware="true"
+        android:forceQueryable="true">
 
         <!-- Fetch the segmentation model with Play services as soon as we're installed -->
         <meta-data
@@ -89,6 +98,15 @@
                 android:name="android.service.wallpaper"
                 android:resource="@xml/wonderland_wallpaper" />
         </service>
+
+        <!-- Apps' processes report here when the framework finds a bottom bar in them -->
+        <receiver
+            android:name=".glass.TabBarSeenReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.penguin.laboratory.action.TAB_BAR_SEEN" />
+            </intent-filter>
+        </receiver>
 
         <!-- SystemUI reads the edge lighting style and images from here while dozing -->
         <provider

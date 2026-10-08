@@ -76,6 +76,17 @@ object TabBarStore {
         Settings.Secure.putString(context.contentResolver, key, list.joinToString(","))
     }
 
+    private const val SEEN = "seen"
+
+    private fun prefs(context: Context) = context.getSharedPreferences("tab_bars", Context.MODE_PRIVATE)
+
+    fun seen(context: Context): Set<String> = prefs(context).getStringSet(SEEN, null) ?: emptySet()
+
+    fun addSeen(context: Context, pkg: String) {
+        val seen = seen(context)
+        if (pkg !in seen) prefs(context).edit().putStringSet(SEEN, seen + pkg).apply()
+    }
+
     fun mode(context: Context, pkg: String) =
         when (pkg) {
             in list(context, EXCLUDED) -> Mode.OFF
@@ -98,6 +109,11 @@ class TabBarAppsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Apps opened meanwhile may have shown their bar
         val apps = loadApps()
         setContent { LabTheme { Apps(apps) } }
     }
@@ -105,11 +121,12 @@ class TabBarAppsActivity : ComponentActivity() {
     private fun loadApps(): List<App> {
         val size = (40 * resources.displayMetrics.density).toInt()
         val launcher = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
+        val seen = TabBarStore.seen(this)
         return packageManager
             .queryIntentActivities(launcher, 0)
             .map { it.activityInfo.applicationInfo }
             .distinctBy { it.packageName }
-            .filter { it.packageName != packageName }
+            .filter { it.packageName in seen }
             .map { info ->
                 val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
                 packageManager.getApplicationIcon(info).apply {
@@ -160,6 +177,16 @@ class TabBarAppsActivity : ComponentActivity() {
                         bottom = padding.calculateBottomPadding() + 24.dp,
                     )
             ) {
+                if (apps.isEmpty()) {
+                    item {
+                        Text(
+                            stringResource(R.string.tab_bars_apps_empty),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(16.dp),
+                        )
+                    }
+                }
                 itemsIndexed(apps, key = { _, app -> app.pkg }) { index, app ->
                     SegmentedBlock(index = index, count = apps.size, modifier = Modifier.padding(bottom = 2.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {

@@ -6,11 +6,11 @@
 <resources>
     <string name="laboratory_title">Penguin Laboratory</string>
     <string name="laboratory_summary">Experiments for your lock screen and notifications</string>
-    <string name="edge_lighting_entry_summary">Rain, snow or bubbles of a photo\'s subject when a notification arrives</string>
+    <string name="edge_lighting_entry_summary">Rain a photo\'s subject across the screen on notifications</string>
     <string name="edge_lighting_title">Edge lighting</string>
     <string name="edge_lighting_summary">Rain a photo\'s subject across the screen when a notification arrives</string>
     <string name="edge_lighting_switch">Use edge lighting</string>
-    <string name="edge_lighting_description">When a notification arrives, the image you pick falls, floats or bursts across the display.</string>
+    <string name="edge_lighting_description">A picked image falls, floats or bursts across the screen on notifications.</string>
     <string name="edge_lighting_preview">Cutout preview</string>
     <string name="edge_lighting_choose">Choose image</string>
     <string name="edge_lighting_play">Preview</string>
@@ -37,7 +37,7 @@
     <string name="edge_lighting_app_icon">Show app icon instead of image</string>
     <string name="edge_lighting_screen_off_only">Only when screen is off</string>
     <string name="edge_lighting_keywords">Style by keyword</string>
-    <string name="edge_lighting_keywords_description">Play a different image when a notification\'s title or text contains a word. Uses the image selected above.</string>
+    <string name="edge_lighting_keywords_description">Play a different image when a notification contains a word.</string>
     <string name="edge_lighting_add_keyword">Add keyword</string>
     <string name="edge_lighting_keyword_hint">Keyword</string>
     <string name="edge_lighting_keyword_needs_image">Select an image first</string>
@@ -45,7 +45,7 @@
     <string name="edge_lighting_remove">Remove</string>
     <string name="wonderland_title">Wonderland</string>
     <string name="wonderland_entry_summary">Layered wallpapers that float as you tilt the phone</string>
-    <string name="wonderland_description">Stack a photo, its cut-out subject, text and particles, and set how far each layer drifts as you tilt the phone.</string>
+    <string name="wonderland_description">Layer a photo, its subject, text and particles that drift as you tilt.</string>
     <string name="wonderland_create">New wallpaper</string>
     <string name="wonderland_empty">No wallpapers yet</string>
     <string name="wonderland_in_use">In use</string>
@@ -55,7 +55,7 @@
     <string name="wonderland_applied">Wallpaper updated</string>
     <string name="wonderland_preview_motion">Motion</string>
     <string name="wonderland_scene">Scene</string>
-    <string name="wonderland_scene_description">Tap a layer in the preview to select it. Drag to move it, pinch to resize and twist with two fingers to rotate.</string>
+    <string name="wonderland_scene_description">Tap a layer to select it. Drag, pinch or twist to move, size and rotate.</string>
     <string name="wonderland_add_layer">Add layer</string>
     <string name="wonderland_add_background">Background photo</string>
     <string name="wonderland_add_subject">Photo subject (cut out)</string>
@@ -75,7 +75,7 @@
     <string name="wonderland_load_failed">Couldn\'t open that photo</string>
     <string name="wonderland_transparency">Transparency</string>
     <string name="wonderland_motion">Motion effect</string>
-    <string name="wonderland_motion_description">How far the layer moves as you tilt the phone. Move a slider left to go the other way.</string>
+    <string name="wonderland_motion_description">How far the layer moves with tilt. Left reverses it.</string>
     <string name="wonderland_motion_x">Side to side (X)</string>
     <string name="wonderland_motion_y">Up and down (Y)</string>
     <string name="wonderland_motion_z">Depth (Z)</string>
@@ -138,7 +138,7 @@
     <string name="dex_title">DeX</string>
     <string name="dex_entry_summary">Use your phone as a desktop on another screen</string>
     <string name="dex_use">Use DeX</string>
-    <string name="dex_use_summary">A connected screen, or your PC with the PenguinOS DeX app, gets a desktop of its own while your phone stays as it is</string>
+    <string name="dex_use_summary">Give a connected screen or your PC its own desktop</string>
     <string name="dex_features">On the desktop</string>
     <string name="dex_dock">Dock</string>
     <string name="dex_dock_summary">Apps in a floating dock along the bottom</string>
@@ -148,19 +148,20 @@
     <string name="dex_control_centre_summary">The status bar opens quick controls instead of the notification shade</string>
     <string name="dex_touchpad">Phone as touchpad</string>
     <string name="dex_touchpad_summary">Offer to move the desktop\'s pointer from your phone</string>
-    <string name="dex_pc_hint">To use DeX on a Windows PC, turn on USB debugging and open the PenguinOS DeX app on the PC.</string>
+    <string name="dex_pc_hint">On a Windows PC, turn on USB debugging and open the PenguinOS DeX app.</string>
 
     <!-- Liquid Glass -->
     <string name="liquid_glass_title">Liquid Glass</string>
     <string name="liquid_glass_entry_summary">Glass that bends and catches the light</string>
     <string name="liquid_glass_use">Use Liquid Glass</string>
-    <string name="liquid_glass_use_summary">The system\'s frosted surfaces become glass: their edges bend what\'s behind them and their rims catch the light</string>
-    <string name="liquid_glass_hint">Applies to every blurred surface, such as the DeX Control Centre and dock, at once.</string>
+    <string name="liquid_glass_use_summary">Turn the system\'s frosted surfaces into light-bending glass</string>
+    <string name="liquid_glass_hint">Applies to every blurred surface at once.</string>
     <string name="tab_bars_header">In apps</string>
     <string name="tab_bars_use">Glass tab bars</string>
-    <string name="tab_bars_use_summary">Bottom bars in apps become a floating glass capsule with a sliding selection, as on iOS. Apps pick it up the next time they open</string>
+    <string name="tab_bars_use_summary">Float apps\' bottom bars as an iOS-style glass capsule</string>
     <string name="tab_bars_apps_title">Choose apps</string>
     <string name="tab_bars_apps_summary">Turn glass off for an app, or let its content run under the bar</string>
+    <string name="tab_bars_apps_empty">Apps appear here once their bottom bar has turned to glass</string>
     <string name="tab_bars_mode_off">Off</string>
     <string name="tab_bars_mode_glass">Glass</string>
     <string name="tab_bars_mode_float">Float</string>
@@ -198,15 +199,15 @@
     <string name="experiments_lock_screen">Lock screen</string>
     <string name="experiments_system">System</string>
     <string name="experiments_ls_media_expand">iOS-style lock screen media art</string>
-    <string name="experiments_ls_media_expand_summary">Tap the artwork in the lock screen player to fill the lock screen with it, and tap it again to go back</string>
+    <string name="experiments_ls_media_expand_summary">Tap the lock screen player\'s artwork to fill the screen with it</string>
     <string name="experiments_ls_media_motion_art">Animated album art</string>
-    <string name="experiments_ls_media_motion_art_summary">Loop the album\'s motion artwork in the expanded player when Apple has one. Looks up the playing song\'s artist and title on Apple Music</string>
+    <string name="experiments_ls_media_motion_art_summary">Loop Apple Music\'s motion artwork in the expanded player</string>
     <string name="experiments_depth_floating">Floating depth wallpaper</string>
-    <string name="experiments_depth_floating_summary">With a depth wallpaper, the lock screen clock floats between the wallpaper and its subject as you tilt the phone</string>
+    <string name="experiments_depth_floating_summary">Float the lock screen clock between wallpaper and subject on tilt</string>
     <string name="experiments_qs_oneui">One UI Quick Settings</string>
-    <string name="experiments_qs_oneui_summary">Replaces Quick Settings with a One UI style panel and always uses the split notification and Quick Settings shade. Turning it off restores your previous style and shade.</string>
+    <string name="experiments_qs_oneui_summary">Use a One UI style Quick Settings with the split shade</string>
     <string name="experiments_back_to_app">Back to app</string>
-    <string name="experiments_back_to_app_summary">When an app opens another, show the app you came from in the status bar and tap it to go back</string>
+    <string name="experiments_back_to_app_summary">Show the app you came from in the status bar to go back to it</string>
     <string name="experiments_recents_frequent_apps">Frequently used apps in recents</string>
     <string name="experiments_recents_frequent_apps_summary">Show the four apps you used most this week below recent apps</string>
 </resources>
