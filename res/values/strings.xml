@@ -179,6 +179,7 @@
     <string name="styles_qs_myui">MyUI</string>
     <string name="styles_qs_harmony">HarmonyOS</string>
     <string name="styles_qs_coloros" translatable="false">ColorOS</string>
+    <string name="styles_qs_stock">Stock Android</string>
     <string name="styles_qs_oneui_active">Unavailable while One UI Quick Settings is on in Experiments</string>
     <string name="styles_qs_folder">Connectivity folder</string>
     <string name="styles_qs_folder_summary">Group Wi-Fi, mobile data and Bluetooth into one Quick Settings card</string>
