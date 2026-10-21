@@ -159,8 +159,18 @@ fun SegmentedBlock(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit,
 ) {
+    // segmentedShapes().shape is the plain resting shape, which a bare Surface draws square; round
+    // the outer corners of the group like the list items around it.
+    val outer = MaterialTheme.shapes.large.topStart
+    val inner = MaterialTheme.shapes.extraSmall.topStart
     Surface(
-        shape = ListItemDefaults.segmentedShapes(index, count).shape,
+        shape =
+            RoundedCornerShape(
+                topStart = if (index == 0) outer else inner,
+                topEnd = if (index == 0) outer else inner,
+                bottomStart = if (index == count - 1) outer else inner,
+                bottomEnd = if (index == count - 1) outer else inner,
+            ),
         color = MaterialTheme.colorScheme.surface,
         modifier = modifier.fillMaxWidth(),
     ) {
