@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -31,6 +32,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.ToggleButton
 import androidx.compose.material3.ToggleButtonDefaults
+import androidx.compose.material3.ToggleButtonShapes
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.toPath
@@ -258,6 +260,8 @@ fun SignedSliderItem(
     }
 }
 
+private val PillShape = RoundedCornerShape(percent = 50)
+
 /**
  * A single-select connected button group spanning the width it's given. Unselected buttons sit on
  * the highest container tone so they stand out from the surface container screens use.
@@ -279,12 +283,8 @@ fun <T> ConnectedChoice(
                 checked = option == selected,
                 onCheckedChange = { onSelect(option) },
                 modifier = Modifier.weight(1f).semantics { role = Role.RadioButton },
-                shapes =
-                    when (index) {
-                        0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
-                        options.lastIndex -> ButtonGroupDefaults.connectedTrailingButtonShapes()
-                        else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
-                    },
+                // Every option is a full pill, like the selected one, so the row has one outline.
+                shapes = ToggleButtonShapes(PillShape, PillShape, PillShape),
                 colors =
                     ToggleButtonDefaults.toggleButtonColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
