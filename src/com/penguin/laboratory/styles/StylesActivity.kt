@@ -63,6 +63,7 @@ object StylesStore {
             Choice(1, R.string.styles_qs_penguin),
             Choice(2, R.string.styles_qs_myui),
             Choice(3, R.string.styles_qs_harmony),
+            Choice(5, R.string.styles_qs_coloros),
         )
     val volumePanel =
         listOf(

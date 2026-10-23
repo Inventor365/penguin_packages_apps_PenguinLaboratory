@@ -32,6 +32,12 @@
             android:value="subject_segment" />
 
         <activity
+            android:name=".cos.CosExperienceActivity"
+            android:exported="false"
+            android:label="@string/cos_title"
+            android:theme="@style/Theme.Laboratory" />
+
+        <activity
             android:name=".glass.LiquidGlassActivity"
             android:exported="false"
             android:label="@string/liquid_glass_title"

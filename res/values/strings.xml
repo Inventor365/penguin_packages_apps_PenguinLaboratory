@@ -178,6 +178,7 @@
     <string name="styles_qs_penguin">Penguin</string>
     <string name="styles_qs_myui">MyUI</string>
     <string name="styles_qs_harmony">HarmonyOS</string>
+    <string name="styles_qs_coloros" translatable="false">ColorOS</string>
     <string name="styles_qs_oneui_active">Unavailable while One UI Quick Settings is on in Experiments</string>
     <string name="styles_qs_folder">Connectivity folder</string>
     <string name="styles_qs_folder_summary">Group Wi-Fi, mobile data and Bluetooth into one Quick Settings card</string>
@@ -210,4 +211,33 @@
     <string name="experiments_back_to_app_summary">Show the app you came from in the status bar to go back to it</string>
     <string name="experiments_recents_frequent_apps">Frequently used apps in recents</string>
     <string name="experiments_recents_frequent_apps_summary">Show the four apps you used most this week below recent apps</string>
+
+    <plurals name="cos_status">
+        <item quantity="one">%d part on</item>
+        <item quantity="other">%d parts on</item>
+    </plurals>
+    <string name="cos_title">COS experience</string>
+    <string name="cos_entry_summary">ColorOS motion and looks, all of it or part by part</string>
+    <string name="cos_all">Whole experience</string>
+    <string name="cos_all_summary">Turn every part below on or off together</string>
+    <string name="cos_parts_header">Parts</string>
+    <string name="cos_app_motion">App open and close</string>
+    <string name="cos_app_motion_summary">Apps open from and close into their icons on ColorOS springs</string>
+    <string name="cos_recents">Recents</string>
+    <string name="cos_recents_summary">ColorOS card motion when opening and leaving recents</string>
+    <string name="cos_shade">Shade motion</string>
+    <string name="cos_shade_summary">ColorOS pull-down and close for the shade and Quick Settings</string>
+    <string name="cos_qs">Quick Settings look</string>
+    <string name="cos_qs_summary">ColorOS glass tiles, sliders and media card</string>
+    <string name="cos_volume">Volume panel</string>
+    <string name="cos_volume_summary">ColorOS volume slider and its expanded panel</string>
+    <string name="cos_media">Media lights</string>
+    <string name="cos_media_summary">Artwork glow on media cards, seekbar light and status sweeps</string>
+    <string name="cos_lockscreen_media">Lockscreen player</string>
+    <string name="cos_lockscreen_media_summary">Full-screen artwork behind the expanded lockscreen player</string>
+    <string name="cos_lockscreen_glass">Lockscreen glass</string>
+    <string name="cos_lockscreen_glass_summary">Glass lock icon, shortcuts and player card</string>
+    <string name="cos_clock">Fluid Clock</string>
+    <string name="cos_clock_summary">The clock carries over from the lockscreen into the home screen when you unlock</string>
+    <string name="cos_footer">Parts follow the whole experience until you set them here.</string>
 </resources>

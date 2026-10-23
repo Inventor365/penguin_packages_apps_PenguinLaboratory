@@ -52,14 +52,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
+import com.penguin.laboratory.cos.CosExperienceActivity
+import com.penguin.laboratory.cos.CosExperienceStore
 import com.penguin.laboratory.dex.DexActivity
 import com.penguin.laboratory.dex.DexStore
 import com.penguin.laboratory.edgelighting.EdgeLightingActivity
-import com.penguin.laboratory.glass.LiquidGlassActivity
-import com.penguin.laboratory.glass.LiquidGlassStore
 import com.penguin.laboratory.edgelighting.EdgeLightingStore
 import com.penguin.laboratory.experiments.ExperimentsActivity
 import com.penguin.laboratory.experiments.ExperimentsStore
+import com.penguin.laboratory.glass.LiquidGlassActivity
+import com.penguin.laboratory.glass.LiquidGlassStore
 import com.penguin.laboratory.styles.StylesActivity
 import com.penguin.laboratory.styles.StylesStore
 import com.penguin.laboratory.ui.LabTheme
@@ -85,6 +87,7 @@ class LaboratoryActivity : ComponentActivity() {
         val wallpapers = remember(generation) { WonderlandStore.projects(this).size }
         val dexOn = remember(generation) { DexStore.isEnabled(this) }
         val glassOn = remember(generation) { LiquidGlassStore.isEnabled(this) }
+        val cosParts = remember(generation) { CosExperienceStore.onCount(this) }
         val stylesChanged = remember(generation) { StylesStore.customised(this) }
         val experimentsOn = remember(generation) { ExperimentsStore.enabledCount(this) }
 
@@ -190,6 +193,22 @@ class LaboratoryActivity : ComponentActivity() {
                         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                     ) {
                         startActivity(Intent(this@LaboratoryActivity, LiquidGlassActivity::class.java))
+                    }
+                }
+                item {
+                    Experiment(
+                        title = stringResource(R.string.cos_title),
+                        summary = stringResource(R.string.cos_entry_summary),
+                        status =
+                            resources.getQuantityString(R.plurals.cos_status, cosParts, cosParts),
+                        active = cosParts > 0,
+                        icon = R.drawable.materialsymbols_ic_motion_photos_on_rounded_filled,
+                        restShape = MaterialShapes.Cookie6Sided,
+                        pressedShape = MaterialShapes.Oval,
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    ) {
+                        startActivity(Intent(this@LaboratoryActivity, CosExperienceActivity::class.java))
                     }
                 }
                 item {
