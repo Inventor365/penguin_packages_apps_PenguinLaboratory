@@ -95,6 +95,13 @@ object ExperimentsStore {
                 R.drawable.materialsymbols_ic_arrow_back_rounded_filled,
             ),
             Experiment(
+                "penguin_luminous_all_apps",
+                secure = true,
+                R.string.experiments_luminous_all_apps,
+                R.string.experiments_luminous_all_apps_summary,
+                R.drawable.materialsymbols_ic_animation_rounded_filled,
+            ),
+            Experiment(
                 "recents_frequent_apps",
                 secure = true,
                 R.string.experiments_recents_frequent_apps,

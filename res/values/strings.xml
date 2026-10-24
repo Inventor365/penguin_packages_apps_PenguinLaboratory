@@ -240,4 +240,6 @@
     <string name="cos_clock">Fluid Clock</string>
     <string name="cos_clock_summary">The clock carries over from the lockscreen into the home screen when you unlock</string>
     <string name="cos_footer">Parts follow the whole experience until you set them here.</string>
+    <string name="experiments_luminous_all_apps">Smooth animations in every app</string>
+    <string name="experiments_luminous_all_apps_summary">Play app view animations on the render thread so they keep moving when an app is busy. System apps always do</string>
 </resources>
