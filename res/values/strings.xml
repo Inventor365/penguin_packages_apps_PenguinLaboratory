@@ -153,6 +153,11 @@
     <!-- Liquid Glass -->
     <string name="liquid_glass_title">Liquid Glass</string>
     <string name="liquid_glass_entry_summary">Glass that bends and catches the light</string>
+    <string name="liquid_glass_style_header">Style</string>
+    <string name="liquid_glass_style_ios">iOS</string>
+    <string name="liquid_glass_style_coloros">ColorOS</string>
+    <string name="liquid_glass_style_ios_summary">Clear glass that bends what is behind it at the edges</string>
+    <string name="liquid_glass_style_coloros_summary">Frosted glass with a soft tint, a lit rim and a faint inner glow, as in ColorOS</string>
     <string name="liquid_glass_use">Use Liquid Glass</string>
     <string name="liquid_glass_use_summary">Turn the system\'s frosted surfaces into light-bending glass</string>
     <string name="liquid_glass_hint">Applies to every blurred surface at once.</string>

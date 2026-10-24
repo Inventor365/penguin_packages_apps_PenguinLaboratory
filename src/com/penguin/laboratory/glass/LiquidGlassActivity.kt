@@ -39,6 +39,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.penguin.laboratory.R
+import com.penguin.laboratory.ui.ConnectedChoice
 import com.penguin.laboratory.ui.LabTheme
 import com.penguin.laboratory.ui.SectionHeader
 import com.penguin.laboratory.ui.SegmentedGroup
@@ -54,6 +55,22 @@ object LiquidGlassStore {
     fun setEnabled(context: Context, enabled: Boolean) {
         Settings.Secure.putInt(context.contentResolver, KEY, if (enabled) 1 else 0)
     }
+
+    enum class Style { Ios, ColorOs }
+
+    private const val STYLE_KEY = "penguin_liquid_glass_style"
+
+    fun style(context: Context) =
+        if (Settings.Secure.getInt(context.contentResolver, STYLE_KEY, 0) == 1) Style.ColorOs
+        else Style.Ios
+
+    fun setStyle(context: Context, style: Style) {
+        Settings.Secure.putInt(
+            context.contentResolver,
+            STYLE_KEY,
+            if (style == Style.ColorOs) 1 else 0,
+        )
+    }
 }
 
 class LiquidGlassActivity : ComponentActivity() {
@@ -68,6 +85,7 @@ class LiquidGlassActivity : ComponentActivity() {
     private fun LiquidGlass() {
         var enabled by remember { mutableStateOf(LiquidGlassStore.isEnabled(this)) }
         var tabBars by remember { mutableStateOf(TabBarStore.isEnabled(this)) }
+        var style by remember { mutableStateOf(LiquidGlassStore.style(this)) }
         val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
         Scaffold(
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -114,6 +132,38 @@ class LiquidGlassActivity : ComponentActivity() {
                             icon = R.drawable.materialsymbols_ic_water_drop_rounded_filled,
                         )
                     }
+                }
+                item { SectionHeader(stringResource(R.string.liquid_glass_style_header)) }
+                item {
+                    ConnectedChoice(
+                        options = LiquidGlassStore.Style.entries,
+                        selected = style,
+                        onSelect = {
+                            LiquidGlassStore.setStyle(this@LiquidGlassActivity, it)
+                            style = it
+                        },
+                        label = {
+                            stringResource(
+                                when (it) {
+                                    LiquidGlassStore.Style.Ios -> R.string.liquid_glass_style_ios
+                                    LiquidGlassStore.Style.ColorOs ->
+                                        R.string.liquid_glass_style_coloros
+                                }
+                            )
+                        },
+                    )
+                }
+                item {
+                    Text(
+                        stringResource(
+                            if (style == LiquidGlassStore.Style.ColorOs)
+                                R.string.liquid_glass_style_coloros_summary
+                            else R.string.liquid_glass_style_ios_summary
+                        ),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                    )
                 }
                 item { SectionHeader(stringResource(R.string.tab_bars_header)) }
                 item {
