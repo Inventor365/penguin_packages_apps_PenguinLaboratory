@@ -151,10 +151,14 @@
     <string name="dex_pc_hint">On a Windows PC, turn on USB debugging and open the PenguinOS DeX app.</string>
 
     <!-- Liquid Glass -->
-    <string name="liquid_glass_title">Liquid Glass</string>
-    <string name="liquid_glass_entry_summary">Glass that bends and catches the light</string>
+    <string name="liquid_glass_title">Liquid Glass &amp; Blur</string>
+    <string name="liquid_glass_entry_summary">Glass that bends light or iOS frosted vibrancy</string>
     <string name="liquid_glass_use">Use Liquid Glass</string>
     <string name="liquid_glass_use_summary">Turn the system\'s frosted surfaces into light-bending glass</string>
+    <string name="liquid_glass_style_header">Blur style</string>
+    <string name="liquid_glass_style_liquid">iOS Liquid Glass</string>
+    <string name="liquid_glass_style_frosted">iOS Frosted</string>
+    <string name="liquid_glass_style_standard">Standard</string>
     <string name="liquid_glass_hint">Applies to every blurred surface at once.</string>
     <string name="tab_bars_header">In apps</string>
     <string name="tab_bars_use">Glass tab bars</string>
