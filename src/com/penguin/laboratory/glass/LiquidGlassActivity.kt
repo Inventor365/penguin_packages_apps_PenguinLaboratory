@@ -39,45 +39,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.penguin.laboratory.R
-import com.penguin.laboratory.ui.ConnectedChoice
 import com.penguin.laboratory.ui.LabTheme
 import com.penguin.laboratory.ui.SectionHeader
 import com.penguin.laboratory.ui.SegmentedGroup
 import com.penguin.laboratory.ui.SwitchItem
 
-/** Liquid Glass & iOS Frosted Blur: the system's blurred surfaces drawn as glass or vibrant frost. */
+/** Liquid Glass: the system's blurred surfaces drawn as glass that bends and catches light. */
 object LiquidGlassStore {
     /** Read by the window manager, which hands it to SurfaceFlinger. */
     private const val KEY = "penguin_liquid_glass"
-    private const val KEY_BLUR_STYLE = "penguin_blur_style"
 
-    const val STYLE_STANDARD = 0
-    const val STYLE_IOS_FROSTED = 1
-    const val STYLE_LIQUID_GLASS = 2
-
-    fun isEnabled(context: Context): Boolean {
-        val cr = context.contentResolver
-        val lg = Settings.Secure.getInt(cr, KEY, 0) != 0
-        val style = Settings.Secure.getInt(cr, KEY_BLUR_STYLE, if (lg) STYLE_LIQUID_GLASS else STYLE_IOS_FROSTED)
-        return lg || style == STYLE_LIQUID_GLASS
-    }
-
-    fun getBlurStyle(context: Context): Int {
-        val cr = context.contentResolver
-        val lg = Settings.Secure.getInt(cr, KEY, 0) != 0
-        val style = Settings.Secure.getInt(cr, KEY_BLUR_STYLE, if (lg) STYLE_LIQUID_GLASS else STYLE_IOS_FROSTED)
-        return if (lg) STYLE_LIQUID_GLASS else style.coerceIn(0, 2)
-    }
-
-    fun setBlurStyle(context: Context, style: Int) {
-        val clamped = style.coerceIn(0, 2)
-        val cr = context.contentResolver
-        Settings.Secure.putInt(cr, KEY_BLUR_STYLE, clamped)
-        Settings.Secure.putInt(cr, KEY, if (clamped == STYLE_LIQUID_GLASS) 1 else 0)
-    }
+    fun isEnabled(context: Context) = Settings.Secure.getInt(context.contentResolver, KEY, 0) != 0
 
     fun setEnabled(context: Context, enabled: Boolean) {
-        setBlurStyle(context, if (enabled) STYLE_LIQUID_GLASS else STYLE_IOS_FROSTED)
+        Settings.Secure.putInt(context.contentResolver, KEY, if (enabled) 1 else 0)
     }
 }
 
@@ -91,8 +66,7 @@ class LiquidGlassActivity : ComponentActivity() {
 
     @Composable
     private fun LiquidGlass() {
-        var blurStyle by remember { mutableStateOf(LiquidGlassStore.getBlurStyle(this)) }
-        val enabled = blurStyle == LiquidGlassStore.STYLE_LIQUID_GLASS
+        var enabled by remember { mutableStateOf(LiquidGlassStore.isEnabled(this)) }
         var tabBars by remember { mutableStateOf(TabBarStore.isEnabled(this)) }
         val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
         Scaffold(
@@ -132,42 +106,14 @@ class LiquidGlassActivity : ComponentActivity() {
                             supporting = stringResource(R.string.liquid_glass_use_summary),
                             checked = enabled,
                             onCheckedChange = {
-                                val newStyle =
-                                    if (it) LiquidGlassStore.STYLE_LIQUID_GLASS
-                                    else LiquidGlassStore.STYLE_IOS_FROSTED
-                                LiquidGlassStore.setBlurStyle(this@LiquidGlassActivity, newStyle)
-                                blurStyle = newStyle
+                                LiquidGlassStore.setEnabled(this@LiquidGlassActivity, it)
+                                enabled = it
                             },
                             index = 0,
                             count = 1,
                             icon = R.drawable.materialsymbols_ic_water_drop_rounded_filled,
                         )
                     }
-                }
-                item { SectionHeader(stringResource(R.string.liquid_glass_style_header)) }
-                item {
-                    ConnectedChoice(
-                        options =
-                            listOf(
-                                LiquidGlassStore.STYLE_LIQUID_GLASS,
-                                LiquidGlassStore.STYLE_IOS_FROSTED,
-                                LiquidGlassStore.STYLE_STANDARD,
-                            ),
-                        selected = blurStyle,
-                        onSelect = { newStyle ->
-                            LiquidGlassStore.setBlurStyle(this@LiquidGlassActivity, newStyle)
-                            blurStyle = newStyle
-                        },
-                        label = { option ->
-                            when (option) {
-                                LiquidGlassStore.STYLE_LIQUID_GLASS ->
-                                    stringResource(R.string.liquid_glass_style_liquid)
-                                LiquidGlassStore.STYLE_IOS_FROSTED ->
-                                    stringResource(R.string.liquid_glass_style_frosted)
-                                else -> stringResource(R.string.liquid_glass_style_standard)
-                            }
-                        },
-                    )
                 }
                 item { SectionHeader(stringResource(R.string.tab_bars_header)) }
                 item {
