@@ -44,12 +44,19 @@ import com.penguin.laboratory.ui.SwitchItem
 object CosExperienceStore {
     private const val ALL = "penguin_cos_experience"
 
-    enum class Part(val key: String, val title: Int, val summary: Int, val icon: Int) {
+    enum class Part(
+        val key: String,
+        val title: Int,
+        val summary: Int,
+        val icon: Int,
+        val defaultOn: Boolean = false,
+    ) {
         AppMotion(
             "penguin_cos_app_motion",
             R.string.cos_app_motion,
             R.string.cos_app_motion_summary,
             R.drawable.materialsymbols_ic_animation_rounded_filled,
+            defaultOn = true,
         ),
         Recents(
             "penguin_cos_recents",
@@ -101,10 +108,11 @@ object CosExperienceStore {
         ),
     }
 
-    private fun all(context: Context) = Settings.Secure.getInt(context.contentResolver, ALL, 0)
+    private fun all(context: Context, part: Part) =
+        Settings.Secure.getInt(context.contentResolver, ALL, if (part.defaultOn) 1 else 0)
 
     fun isOn(context: Context, part: Part) =
-        Settings.Secure.getInt(context.contentResolver, part.key, all(context)) == 1
+        Settings.Secure.getInt(context.contentResolver, part.key, all(context, part)) == 1
 
     fun setOn(context: Context, part: Part, on: Boolean) {
         Settings.Secure.putInt(context.contentResolver, part.key, if (on) 1 else 0)
