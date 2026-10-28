@@ -25,6 +25,7 @@ import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialExpressiveTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MotionScheme
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
@@ -143,6 +144,33 @@ fun SwitchItem(
         leadingContent = icon?.let { { Icon(painterResource(it), contentDescription = null) } },
         supportingContent = supporting?.let { { Text(it) } },
         trailingContent = { Switch(checked = checked, onCheckedChange = null) },
+    ) {
+        Text(title)
+    }
+}
+
+/**
+ * A segmented list item that is one option of a single choice, for lists too long for a
+ * [ConnectedChoice] row to show their names.
+ */
+@Composable
+fun RadioItem(
+    title: String,
+    selected: Boolean,
+    onSelect: () -> Unit,
+    index: Int,
+    count: Int,
+    enabled: Boolean = true,
+    supporting: String? = null,
+) {
+    SegmentedListItem(
+        selected = selected,
+        onClick = onSelect,
+        shapes = ListItemDefaults.segmentedShapes(index, count),
+        enabled = enabled,
+        modifier = Modifier.semantics { role = Role.RadioButton },
+        leadingContent = { RadioButton(selected = selected, onClick = null, enabled = enabled) },
+        supportingContent = supporting?.let { { Text(it) } },
     ) {
         Text(title)
     }

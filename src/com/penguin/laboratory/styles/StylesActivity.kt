@@ -42,6 +42,7 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import com.penguin.laboratory.R
 import com.penguin.laboratory.ui.ConnectedChoice
 import com.penguin.laboratory.ui.LabTheme
+import com.penguin.laboratory.ui.RadioItem
 import com.penguin.laboratory.ui.SectionHeader
 import com.penguin.laboratory.ui.SegmentedBlock
 import com.penguin.laboratory.ui.SegmentedGroup
@@ -149,20 +150,28 @@ class StylesActivity : ComponentActivity() {
             ) {
                 item { SectionHeader(stringResource(R.string.styles_qs_title)) }
                 item {
+                    // Six styles don't fit a row of buttons without cutting their names to a
+                    // couple of letters, so list them, with the folder switch closing the group.
+                    val styles =
+                        listOf(StylesStore.Choice(0, R.string.styles_default)) +
+                            StylesStore.qsPanel
+                    val count = styles.size + 1
                     SegmentedGroup {
-                        SegmentedBlock(index = 0, count = 2) {
-                            StyleChoice(
-                                choices = StylesStore.qsPanel,
-                                selected = qs,
+                        styles.forEachIndexed { index, choice ->
+                            RadioItem(
+                                title = stringResource(choice.label),
+                                selected = qs == choice.value,
                                 enabled = !oneUi,
-                                default = Pair(0, R.string.styles_default),
-                            ) {
-                                StylesStore.put(context, StylesStore.QS_PANEL, it)
-                                qs = it
-                            }
-                            if (oneUi) {
-                                Note(stringResource(R.string.styles_qs_oneui_active))
-                            }
+                                onSelect = {
+                                    StylesStore.put(context, StylesStore.QS_PANEL, choice.value)
+                                    qs = choice.value
+                                },
+                                supporting =
+                                    stringResource(R.string.styles_qs_oneui_active)
+                                        .takeIf { oneUi && index == 0 },
+                                index = index,
+                                count = count,
+                            )
                         }
                         SwitchItem(
                             title = stringResource(R.string.styles_qs_folder),
@@ -172,8 +181,8 @@ class StylesActivity : ComponentActivity() {
                                 StylesStore.put(context, StylesStore.QS_FOLDER, if (it) 1 else 0)
                                 folder = it
                             },
-                            index = 1,
-                            count = 2,
+                            index = count - 1,
+                            count = count,
                             icon = R.drawable.materialsymbols_ic_grid_view_rounded_filled,
                         )
                     }
@@ -221,16 +230,6 @@ class StylesActivity : ComponentActivity() {
             selected = selected,
             onSelect = { if (enabled) onSelect(it) },
             label = { stringResource(labels.getValue(it)) },
-            modifier = Modifier.padding(bottom = 12.dp),
-        )
-    }
-
-    @Composable
-    private fun Note(text: String) {
-        Text(
-            text,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(bottom = 12.dp),
         )
     }
